@@ -31,7 +31,7 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 # Bind to all interfaces inside the container.
 ENV HOSTNAME=0.0.0.0
-ENV PORT=9040
+ENV PORT=9060
 
 # Run as an unprivileged user.
 RUN addgroup --system --gid 1001 nodejs \
@@ -44,7 +44,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-EXPOSE 9040
+EXPOSE 9060
 
 # server.js is emitted at the root of the standalone output.
 CMD ["node", "server.js"]
