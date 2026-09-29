@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# keep the documented template
+!.env.example
+
+# runtime data (uploads, submission records, dev outbox)
+/.data/
+/storage/

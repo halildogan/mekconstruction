@@ -6,18 +6,19 @@ services:
     image: mek-construction
     container_name: mek-construction
     restart: unless-stopped
+    # Bound to localhost only: public traffic arrives through Cloudflare Tunnel
+    # (cloudflared → http://127.0.0.1:9060). Do not expose this port publicly.
     ports:
-      - "9060:9060"
-    # Runtime secrets (Resend key + email addresses). Copy
-    # .env.local.example -> .env.local and fill in real values.
+      - "127.0.0.1:9060:9060"
+    # Runtime configuration and secrets. Copy .env.example → .env.local and fill in.
     env_file:
       - path: .env.local
         required: false
     environment:
       NODE_ENV: production
-    healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:9060/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    volumes:
+      # Private storage for uploaded tender documents and submission records.
+      - mek-data:/app/.data
+
+volumes:
+  mek-data:

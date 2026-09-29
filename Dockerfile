@@ -3,48 +3,69 @@
 # ─────────────────────────────────────────────────────────────
 # MEK Construction — Next.js 16 production image
 # Multi-stage build using Next.js "standalone" output.
-# Next 16 requires Node >= 20.9; we pin the current LTS (22).
+#
+# Dependencies are installed with pnpm from pnpm-lock.yaml, which records the
+# native binaries for every platform (Linux musl included). Do not switch to
+# a package-lock.json generated on Windows: npm omits other platforms'
+# optional dependencies (npm/cli#4828), which breaks Tailwind, LightningCSS,
+# SWC and sharp on Alpine.
 # ─────────────────────────────────────────────────────────────
 
 FROM node:22-alpine AS base
-# Next.js standalone server can need this on Alpine (glibc shim).
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat \
+  && corepack enable
 WORKDIR /app
 
 # ── Dependencies ──────────────────────────────────────────────
 FROM base AS deps
-# Install from lockfile only — reproducible, no dev network surprises.
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack install && pnpm install --frozen-lockfile
 
 # ── Build ─────────────────────────────────────────────────────
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
+# .dockerignore keeps host node_modules, .next and .env out of this copy.
 COPY . .
-# Never trace/bake secrets at build time; runtime env is injected by compose.
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+# NEXT_PUBLIC_* values are inlined at build time; pass them as build args if used.
+ARG NEXT_PUBLIC_SITE_URL=https://mekdomain.ca
+ARG NEXT_PUBLIC_ANALYTICS_PROVIDER=none
+ARG NEXT_PUBLIC_ANALYTICS_SCRIPT_URL=
+ARG NEXT_PUBLIC_ANALYTICS_SITE_ID=
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    NEXT_PUBLIC_ANALYTICS_PROVIDER=$NEXT_PUBLIC_ANALYTICS_PROVIDER \
+    NEXT_PUBLIC_ANALYTICS_SCRIPT_URL=$NEXT_PUBLIC_ANALYTICS_SCRIPT_URL \
+    NEXT_PUBLIC_ANALYTICS_SITE_ID=$NEXT_PUBLIC_ANALYTICS_SITE_ID \
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
+RUN pnpm build
 
 # ── Runtime ───────────────────────────────────────────────────
-FROM base AS runner
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-# Bind to all interfaces inside the container.
-ENV HOSTNAME=0.0.0.0
-ENV PORT=9060
+FROM node:22-alpine AS runner
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    HOSTNAME=0.0.0.0 \
+    PORT=9060 \
+    STORAGE_LOCAL_DIR=/app/.data/storage
 
-# Run as an unprivileged user.
 RUN addgroup --system --gid 1001 nodejs \
-  && adduser --system --uid 1001 nextjs
+  && adduser --system --uid 1001 nextjs \
+  && mkdir -p /app/.data/storage \
+  && chown -R nextjs:nodejs /app/.data
 
-# Static assets served directly by the standalone server.
 COPY --from=builder /app/public ./public
-# The standalone output bundles a minimal server.js + traced node_modules.
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Uploaded tender documents and submission records (private; mount a volume).
+VOLUME ["/app/.data"]
 
 USER nextjs
 EXPOSE 9060
 
-# server.js is emitted at the root of the standalone output.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD node -e "fetch('http://127.0.0.1:9060/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+
 CMD ["node", "server.js"]

@@ -59,6 +59,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle (.next/standalone) for the Docker image.
+  // `pnpm start` (next start) keeps working for the systemd deployment.
+  output: "standalone",
+  // sharp (image optimization) loads its libvips shared libraries implicitly,
+  // so file tracing can miss them. Include sharp's native packages explicitly,
+  // for both hoisted and pnpm (isolated) node_modules layouts.
+  outputFileTracingIncludes: {
+    "/*": ["./node_modules/@img/**/*", "./node_modules/.pnpm/@img+sharp*/node_modules/@img/**/*"],
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   images: {

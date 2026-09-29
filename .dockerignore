@@ -1,0 +1,32 @@
+# Host-installed dependencies and build output must never enter the image:
+# they contain platform-specific native binaries (e.g. Windows builds of
+# @tailwindcss/oxide) that break the Linux/Alpine build.
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets and runtime data — supplied at runtime, never baked into layers.
+.env
+.env.*
+!.env.example
+.data
+storage
+
+# Repository / tooling noise
+.git
+.gitignore
+.vscode
+.idea
+*.log
+npm-debug.log*
+pnpm-debug.log*
+package-lock.json
+legacy
+tests
+Dockerfile
+docker-compose*.yml
+.dockerignore
