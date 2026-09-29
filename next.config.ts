@@ -1,4 +1,7 @@
+import path from "node:path";
 import type { NextConfig } from "next";
+
+const projectRoot = path.resolve(__dirname);
 
 /*
  * Headers and redirects are compiled at build time, so NEXT_PUBLIC_* and
@@ -62,11 +65,16 @@ const nextConfig: NextConfig = {
   // Self-contained server bundle (.next/standalone) for the Docker image.
   // `pnpm start` (next start) keeps working for the systemd deployment.
   output: "standalone",
+  // Pin the project root so a lockfile in a parent directory can never change
+  // the workspace root (which would nest the standalone output).
+  outputFileTracingRoot: projectRoot,
+  turbopack: { root: projectRoot },
   // sharp (image optimization) loads its libvips shared libraries implicitly,
-  // so file tracing can miss them. Include sharp's native packages explicitly,
-  // for both hoisted and pnpm (isolated) node_modules layouts.
+  // so file tracing can miss them. Include sharp's native packages explicitly.
+  // Requires the flat layout set in .npmrc (node-linker=hoisted): symlinked
+  // pnpm package folders make Turbopack's tracer fail with EISDIR.
   outputFileTracingIncludes: {
-    "/*": ["./node_modules/@img/**/*", "./node_modules/.pnpm/@img+sharp*/node_modules/@img/**/*"],
+    "/*": ["./node_modules/@img/**/*"],
   },
   poweredByHeader: false,
   reactStrictMode: true,
