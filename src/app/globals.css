@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/*
+ * MEK Construction design tokens.
+ *
+ * Palette: near-black charcoal, off-white paper, concrete and steel greys, and
+ * one restrained amber accent (carried over from the previous MEK brand gold,
+ * toned down). Contrast is checked against WCAG 2.2 AA for every text pairing
+ * used: accent-ink on paper 5.4:1, steel-600 on paper 5.5:1, accent on ink 8.4:1.
+ */
+@theme {
+  --color-ink: #111315;
+  --color-charcoal: #181b1e;
+  --color-graphite: #24282c;
+  --color-steel-700: #3b4147;
+  --color-steel-600: #5c646c;
+  --color-steel-400: #9aa2a9;
+  --color-concrete-300: #b9bfc4;
+  --color-concrete-200: #d9dcde;
+  --color-concrete-100: #e8e9e8;
+  --color-paper: #f5f4f0;
+  --color-white: #ffffff;
+  --color-accent: #e3a21a;
+  --color-accent-hover: #efb23a;
+  --color-accent-ink: #8a5a00;
+  --color-danger: #b42318;
+  --color-danger-soft: #fdecea;
+  --color-success: #1f7a4d;
+  --color-success-soft: #e7f4ec;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --breakpoint-xs: 23.4375rem; /* 375px */
+  --breakpoint-3xl: 120rem; /* 1920px */
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@layer base {
+  :root {
+    --focus-ring: var(--color-ink);
+    --header-height: 4.5rem;
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, high-contrast focus for keyboard users on every surface. */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .surface-dark {
+    --focus-ring: var(--color-accent);
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Technical label used for section numbers, metadata and small captions. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    font-stretch: 86%;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .heading {
+    font-stretch: 92%;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+  }
+
+  .prose-mek {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-steel-700);
+  }
+  .prose-mek > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-mek h2 {
+    margin-top: 2.2em;
+    font-size: 1.5rem;
+    font-weight: 650;
+    font-stretch: 92%;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+  .prose-mek h3 {
+    margin-top: 1.8em;
+    font-size: 1.15rem;
+    font-weight: 650;
+    color: var(--color-ink);
+  }
+  .prose-mek ul {
+    list-style: square;
+    padding-left: 1.25rem;
+  }
+  .prose-mek li + li {
+    margin-top: 0.4em;
+  }
+  .prose-mek a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 2px;
+  }
+
+  /* Faint architectural grid used behind select sections. */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(17 19 21 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(17 19 21 / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .grid-lines-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+/*
+ * Subtle reveal using scroll-driven animations — no JavaScript. Browsers
+ * without support simply show content immediately.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
