@@ -6,6 +6,13 @@ export function absoluteUrl(path = "/"): string {
   return new URL(path, siteConfig.url).toString();
 }
 
+const DEFAULT_SHARE_IMAGE = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: `${siteConfig.legalName} — commercial interior trade contractor, Toronto & GTA`,
+};
+
 interface PageMetadataInput {
   title: string;
   description: string;
@@ -33,11 +40,14 @@ export function createMetadata({ title, description, path, absoluteTitle, noInde
       url: path,
       title: fullTitle,
       description,
+      // Route-level opengraph-image files (services) take precedence over this default.
+      images: [DEFAULT_SHARE_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [DEFAULT_SHARE_IMAGE],
     },
     robots: noIndex ? { index: false, follow: true } : undefined,
   };

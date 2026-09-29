@@ -12,7 +12,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
  * - businessHours: taken from the previous site, where the weekday line was
  *   garbled ("Weekdays: Fri: 7:00 AM – 5:00 PM"). Confirm before relying on it.
  * - publicEmail: NOT verified. The previous site showed a template address
- *   (info@construction.com), which must not be used. Set a real mailbox here
+ *   from a generic template domain, which must not be used. Set a real mailbox here
  *   and every email link, the footer, the contact page and structured data
  *   will pick it up. While it is undefined, email is simply not displayed.
  *

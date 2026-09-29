@@ -59,9 +59,11 @@ export function Header() {
             >
               <Phone aria-hidden="true" className="size-5" />
             </a>
-            <LinkButton href="/invite-to-bid" variant="primary" className="hidden sm:inline-flex">
-              Invite MEK to Bid
-            </LinkButton>
+            <div className="hidden sm:block">
+              <LinkButton href="/invite-to-bid" variant="primary">
+                Invite MEK to Bid
+              </LinkButton>
+            </div>
             <div className="lg:hidden">
               <MobileNavigation
                 items={siteConfig.primaryNavigation}

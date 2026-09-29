@@ -1,21 +1,27 @@
 import type { Service } from "@/types/content";
 import { images } from "@/content/images";
+import { exteriorServices } from "@/content/services-exterior";
 
 /**
- * Trade services. This is the single source of truth for service pages, the
- * services index, homepage cards, navigation, forms and structured data.
+ * Service catalogue — the single source of truth for service pages, the
+ * services index, homepage cards, forms and structured data.
  *
- * To add a service: append an entry with a unique slug, then (optionally) add
- * it to the bid-invitation trade list in `src/lib/forms/options.ts`.
- * `pnpm test` validates slugs and cross-references.
+ * Exterior façade / building-envelope services (primary) live in
+ * `services-exterior.ts`; interior construction services (secondary) are
+ * below. Each service belongs to a category in `service-categories.ts`.
+ *
+ * To add a service: add an entry with a unique slug and a category, then
+ * (optionally) add it to the bid-invitation trade list in
+ * `src/lib/forms/options.ts`. `pnpm test` validates slugs and references.
  */
 
 const ASSEMBLY_NOTE =
   "Fire-rated, acoustic and other tested assemblies are installed to the approved drawings, specifications and listed assembly details issued for the project. MEK installs these systems; it does not design or certify them.";
 
-export const services: Service[] = [
+const interiorServices: Service[] = [
   {
     slug: "drywall-installation",
+    category: "interior",
     name: "Drywall Installation",
     tagline: "Commercial gypsum board systems for walls, ceilings and shafts.",
     summary:
@@ -51,8 +57,8 @@ export const services: Service[] = [
     relatedServices: ["metal-stud-framing", "taping-and-finishing", "insulation", "acoustic-ceilings"],
     scopeNote: ASSEMBLY_NOTE,
     image: images.services.drywall,
-    featured: true,
-    order: 1,
+    featured: false,
+    order: 101,
     seo: {
       title: "Commercial Drywall Contractor — Toronto & GTA",
       description:
@@ -61,6 +67,7 @@ export const services: Service[] = [
   },
   {
     slug: "metal-stud-framing",
+    category: "interior",
     name: "Metal Stud Framing",
     tagline: "Steel stud partitions, ceilings and bulkheads, laid out and built to the drawings.",
     summary:
@@ -97,8 +104,8 @@ export const services: Service[] = [
     scopeNote:
       "Framing is built to the approved drawings and specifications. Where framing requires engineering (for example, tall walls or heavy wall-mounted loads), it is installed to the engineered design supplied for the project.",
     image: images.services.framing,
-    featured: true,
-    order: 2,
+    featured: false,
+    order: 102,
     seo: {
       title: "Metal Stud Framing Contractor — Toronto & GTA",
       description:
@@ -107,6 +114,7 @@ export const services: Service[] = [
   },
   {
     slug: "taping-and-finishing",
+    category: "interior",
     name: "Taping & Finishing",
     tagline: "Joint treatment and finishing to the level the specification calls for.",
     summary:
@@ -139,8 +147,8 @@ export const services: Service[] = [
     sectors: ["commercial", "office", "retail", "institutional", "tenant-improvements"],
     relatedServices: ["drywall-installation", "painting", "plastering"],
     image: images.services.taping,
-    featured: true,
-    order: 3,
+    featured: false,
+    order: 103,
     seo: {
       title: "Drywall Taping & Finishing Contractor — Toronto",
       description:
@@ -149,6 +157,7 @@ export const services: Service[] = [
   },
   {
     slug: "plastering",
+    category: "interior",
     name: "Plastering",
     tagline: "Skim coats, patching and plaster repairs for commercial interiors.",
     summary:
@@ -178,7 +187,7 @@ export const services: Service[] = [
     relatedServices: ["taping-and-finishing", "painting", "interior-renovations"],
     image: images.services.plastering,
     featured: false,
-    order: 4,
+    order: 104,
     seo: {
       title: "Commercial Plastering & Skim Coating — Toronto",
       description:
@@ -187,7 +196,8 @@ export const services: Service[] = [
   },
   {
     slug: "insulation",
-    name: "Insulation",
+    category: "interior",
+    name: "Interior Insulation",
     tagline: "Acoustic and thermal insulation installed within framed assemblies.",
     summary:
       "Acoustic and thermal insulation installed within walls, ceilings and bulkheads, including insulation that forms part of a specified assembly.",
@@ -217,8 +227,8 @@ export const services: Service[] = [
     relatedServices: ["metal-stud-framing", "drywall-installation"],
     scopeNote: ASSEMBLY_NOTE,
     image: images.services.insulation,
-    featured: true,
-    order: 5,
+    featured: false,
+    order: 105,
     seo: {
       title: "Commercial Acoustic & Thermal Insulation — Toronto & GTA",
       description:
@@ -227,7 +237,8 @@ export const services: Service[] = [
   },
   {
     slug: "painting",
-    name: "Painting",
+    category: "interior",
+    name: "Interior Painting",
     tagline: "Commercial interior painting from primer to final coat.",
     summary:
       "Interior painting of walls, ceilings, doors and frames in commercial spaces, applied to the specified coating system and colour schedule.",
@@ -257,8 +268,8 @@ export const services: Service[] = [
     sectors: ["commercial", "office", "retail", "institutional", "industrial", "tenant-improvements"],
     relatedServices: ["taping-and-finishing", "plastering", "interior-renovations"],
     image: images.services.painting,
-    featured: true,
-    order: 6,
+    featured: false,
+    order: 106,
     seo: {
       title: "Commercial Painting Contractor — Toronto & GTA",
       description:
@@ -267,6 +278,7 @@ export const services: Service[] = [
   },
   {
     slug: "acoustic-ceilings",
+    category: "interior",
     name: "Acoustic Ceilings",
     tagline: "Suspended ceiling grid and acoustic tile, coordinated with ceiling services.",
     summary:
@@ -297,8 +309,8 @@ export const services: Service[] = [
     sectors: ["commercial", "office", "retail", "institutional", "tenant-improvements"],
     relatedServices: ["metal-stud-framing", "drywall-installation", "interior-renovations"],
     image: images.services.acoustic,
-    featured: true,
-    order: 7,
+    featured: false,
+    order: 107,
     seo: {
       title: "Acoustic Ceiling Installation — Toronto & GTA",
       description:
@@ -307,6 +319,7 @@ export const services: Service[] = [
   },
   {
     slug: "flooring",
+    category: "interior",
     name: "Flooring",
     tagline: "Commercial floor finishes installed over prepared substrates.",
     summary:
@@ -337,7 +350,7 @@ export const services: Service[] = [
     relatedServices: ["interior-renovations", "painting", "selective-demolition"],
     image: images.services.flooring,
     featured: false,
-    order: 8,
+    order: 108,
     seo: {
       title: "Commercial Flooring Installation — Toronto & GTA",
       description:
@@ -346,6 +359,7 @@ export const services: Service[] = [
   },
   {
     slug: "interior-renovations",
+    category: "interior",
     name: "Interior Renovations",
     tagline: "Multi-trade interior scopes for tenant improvements and renovations.",
     summary:
@@ -380,7 +394,7 @@ export const services: Service[] = [
       "MEK performs interior trade work. Scopes requiring design, engineering, permits or licensed trades (for example, electrical or mechanical work) are carried by the appropriate parties on the project.",
     image: images.services.renovations,
     featured: false,
-    order: 9,
+    order: 109,
     seo: {
       title: "Commercial Interior Renovation Contractor — Toronto",
       description:
@@ -389,7 +403,8 @@ export const services: Service[] = [
   },
   {
     slug: "selective-demolition",
-    name: "Selective Demolition",
+    category: "interior",
+    name: "Interior Selective Demolition",
     tagline: "Interior strip-outs and selective removals ahead of new work.",
     summary:
       "Interior strip-outs and selective removal of partitions, ceilings and finishes to prepare a space for new construction.",
@@ -420,7 +435,7 @@ export const services: Service[] = [
       "Selective demolition is limited to non-structural interior elements identified on the demolition drawings. Designated substance surveys and abatement are completed by qualified parties before interior demolition begins.",
     image: images.services.demolition,
     featured: false,
-    order: 10,
+    order: 110,
     seo: {
       title: "Interior Selective Demolition — Toronto & GTA",
       description:
@@ -428,3 +443,5 @@ export const services: Service[] = [
     },
   },
 ];
+
+export const services: Service[] = [...exteriorServices, ...interiorServices];

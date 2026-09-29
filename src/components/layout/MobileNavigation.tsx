@@ -68,10 +68,10 @@ export function MobileNavigation({ items, phone, serviceArea }: MobileNavigation
         onClick={openMenu}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 border border-ink/20 px-3 text-sm font-semibold text-ink hover:border-ink"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 border border-ink/20 px-2.5 text-sm font-semibold text-ink hover:border-ink xs:px-3"
       >
         <Menu aria-hidden="true" className="size-5" />
-        <span>Menu</span>
+        <span className="sr-only xs:not-sr-only">Menu</span>
       </button>
 
       <dialog

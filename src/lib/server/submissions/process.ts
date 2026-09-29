@@ -53,6 +53,10 @@ function submissionPrefix(kind: SubmissionKind, reference: string, receivedAt: D
   return `submissions/${kind}/${year}/${month}/${reference}`;
 }
 
+function omit<T extends Record<string, unknown>>(value: T, keys: string[]): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(value).filter(([key]) => !keys.includes(key)));
+}
+
 function toFieldErrors(issues: readonly z.core.$ZodIssue[]): Record<string, string[]> {
   const out: Record<string, string[]> = {};
   for (const issue of issues) {
@@ -155,16 +159,8 @@ export async function processSubmission(
       notifications: { internal: "skipped" as NotificationStatus, acknowledgement: "skipped" as NotificationStatus },
     };
     // Drop transport-only fields before storing.
-    if (kind === "bid") {
-      const { attachments: _a, consent: _c, ...rest } = data as z.output<typeof schemasByKind.bid>;
-      record = { ...base, kind, data: rest };
-    } else if (kind === "quote") {
-      const { attachments: _a, consent: _c, ...rest } = data as z.output<typeof schemasByKind.quote>;
-      record = { ...base, kind, data: rest };
-    } else {
-      const { consent: _c, ...rest } = data as z.output<typeof schemasByKind.contact>;
-      record = { ...base, kind, data: rest };
-    }
+    const stored = omit(data as Record<string, unknown>, ["attachments", "consent"]);
+    record = { ...base, kind, data: stored } as StoredSubmission;
 
     await storage.put(`${prefix}/submission.json`, Buffer.from(JSON.stringify(record, null, 2)), "application/json");
   } catch (error) {

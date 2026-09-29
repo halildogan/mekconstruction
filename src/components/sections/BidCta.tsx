@@ -3,14 +3,14 @@ import { bidChecklist, tradePackageSections } from "@/content/procurement";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 
-export function BidCta({ index = "04" }: { index?: string }) {
+export function BidCta({ index }: { index?: string }) {
   return (
     <section className="surface-dark relative overflow-hidden bg-charcoal py-16 text-white sm:py-20 lg:py-28" aria-labelledby="bid-cta-heading">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-accent" />
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
           <p className="eyebrow text-steel-400">
-            <span className="text-accent">{index} / </span>For general contractors &amp; construction managers
+            {index && <span className="text-accent">{index} / </span>}For general contractors &amp; construction managers
           </p>
           <h2 id="bid-cta-heading" className="display mt-5 text-4xl sm:text-5xl lg:text-6xl">
             Invite MEK to bid.

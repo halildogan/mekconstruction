@@ -24,8 +24,34 @@ export interface Seo {
   description?: string;
 }
 
+export type ServiceCategoryId = "facade-cladding" | "building-envelope" | "facade-repair" | "interior";
+
+export interface ServiceCategory {
+  id: ServiceCategoryId;
+  name: string;
+  /** Short label for navigation and chips. */
+  shortName: string;
+  description: string;
+  /** Primary categories lead the site; secondary ones are listed after them with less emphasis. */
+  emphasis: "primary" | "secondary";
+  order: number;
+}
+
+/**
+ * Scope that appears alongside MEK's work on façade projects but is NOT
+ * advertised as self-performed (e.g. curtain wall, masonry). Shown only as
+ * "related / coordinated scope". Promote an item to a Service only once MEK
+ * confirms it performs that work directly.
+ */
+export interface CoordinatedScope {
+  group: "glazing-openings" | "related-exterior";
+  name: string;
+  description: string;
+}
+
 export interface Service {
   slug: string;
+  category: ServiceCategoryId;
   name: string;
   /** One or two sentences used on cards and in meta descriptions. */
   summary: string;
@@ -70,6 +96,17 @@ export type ClientType =
   | "institution"
   | "other";
 
+export type ProjectCategoryId =
+  | "facade"
+  | "stucco-eifs"
+  | "cladding"
+  | "building-envelope"
+  | "commercial"
+  | "industrial"
+  | "institutional"
+  | "multi-residential"
+  | "interior";
+
 export interface ProjectMetadataItem {
   label: string;
   value: string;
@@ -88,6 +125,8 @@ export interface Project {
   featured?: boolean;
   location?: string;
   sector?: string;
+  /** Portfolio filter categories. */
+  categories?: ProjectCategoryId[];
   services?: string[];
   clientType?: ClientType;
   /** ISO date (YYYY-MM or YYYY-MM-DD). */

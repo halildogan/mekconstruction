@@ -1,5 +1,22 @@
 import type { ImageAsset, ImageCredit } from "@/types/content";
 
+import heroFacade from "@/assets/images/hero/facade-cladding.jpg";
+import extStucco from "@/assets/images/exterior/stucco-eifs.jpg";
+import extAluminum from "@/assets/images/exterior/aluminum-cladding.jpg";
+import extMetal from "@/assets/images/exterior/metal-panel-cladding.jpg";
+import extFiberCement from "@/assets/images/exterior/fiber-cement.jpg";
+import extSoffit from "@/assets/images/exterior/soffit-fascia.jpg";
+import extInsulation from "@/assets/images/exterior/exterior-insulation.jpg";
+import extFraming from "@/assets/images/exterior/framing-sheathing.jpg";
+import extAirBarrier from "@/assets/images/exterior/air-barrier.jpg";
+import extRainscreen from "@/assets/images/exterior/rainscreen.jpg";
+import extWaterproofing from "@/assets/images/exterior/waterproofing.jpg";
+import extSealants from "@/assets/images/exterior/sealants.jpg";
+import extRestoration from "@/assets/images/exterior/facade-restoration.jpg";
+import extRetrofit from "@/assets/images/exterior/envelope-retrofit.jpg";
+import secCommercialExt from "@/assets/images/sectors/commercial-exterior.jpg";
+import secMultiRes from "@/assets/images/sectors/multi-residential.jpg";
+import secOfficeExt from "@/assets/images/sectors/office-exterior.jpg";
 import heroInteriorFraming from "@/assets/images/hero/interior-framing.jpg";
 import aboutDrywallBracing from "@/assets/images/about/drywall-bracing.jpg";
 import svcDrywall from "@/assets/images/services/drywall-installation.jpg";
@@ -35,6 +52,142 @@ const CC_BY_2 = { license: "CC BY 2.0", licenseUrl: "https://creativecommons.org
 const commons = (file: string) => `https://commons.wikimedia.org/wiki/File:${file}`;
 
 export const imageCredits: ImageCredit[] = [
+  {
+    id: "hero-facade-cladding",
+    title: "Cladding a new department store building",
+    author: "Fernweh",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Cladding_the_new_John_Lewis_-_geograph.org.uk_-_4713035.jpg",
+  },
+  {
+    id: "ext-stucco-eifs",
+    title: "Insulation boards and plaster applied on a building façade",
+    author: "Cjp24",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:PSE_Insulation_boards_and_plaster_applied_on_a_building_facade.jpg",
+  },
+  {
+    id: "ext-aluminum-cladding",
+    title: "Cladding going up on a new building",
+    author: "Martyn Pattison",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Cladding_going_up_on_new_building_on_Moor_Lane_-_geograph.org.uk_-_7252360.jpg",
+  },
+  {
+    id: "ext-metal-panel-cladding",
+    title: "Kinetic cladding on a high-rise building",
+    author: "Phillip Pessar",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kinetic_Cladding_830_Brickell_Building,_Miami_FL,_3_Oct_2022_-_01.jpg",
+  },
+  {
+    id: "ext-fiber-cement",
+    title: "Fibre cement cladding on a residential tower",
+    author: "Marcin Floryan",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Fiber_Cement_cladding_on_Mercury_Tower.jpg",
+  },
+  {
+    id: "ext-soffit-fascia",
+    title: "Discovery Square building exterior",
+    author: "w_lemay",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Discovery_Square,_2nd_Avenue_SW_and_4th_Street_SW,_Rochester,_MN_-_54369110701.jpg",
+  },
+  {
+    id: "ext-exterior-insulation",
+    title: "Insulation boards on a building façade",
+    author: "Cjp24",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Insulation_boards_on_a_building_facade.jpg",
+  },
+  {
+    id: "ext-framing-sheathing",
+    title: "Office building façade under construction",
+    author: "Lasse Keskinen",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Signe_office_building_(Mannerheimintie_14,_Helsinki,_Finland)_Kalevankatu_facade_under_construction_Sep_13,_2025.jpg",
+  },
+  {
+    id: "ext-air-barrier",
+    title: "Mid-rise building with exterior sheathing",
+    author: "Tiia Monto",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Jyv%C3%A4skyl%C3%A4_-_Rusokinkatu_12.jpg",
+  },
+  {
+    id: "ext-rainscreen",
+    title: "Installation of zinc cladding on a museum façade",
+    author: "Museum of Contemporary Art Kiasma (Finnish National Gallery)",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Installation_of_zink_cladding_on_Kiasma_east_fa%C3%A7ade,_1997_(14117140288).jpg",
+  },
+  {
+    id: "ext-waterproofing",
+    title: "Applying base coat to insulation at the base of a wall",
+    author: "Hamed shahrokhei",
+    license: "CC0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Step1XPS.jpg",
+  },
+  {
+    id: "ext-sealants",
+    title: "Workers on a suspended scaffold",
+    author: "Dmitry Ivanov",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Workers_on_suspended_scaffold_in_Korolyov.jpg",
+  },
+  {
+    id: "ext-facade-restoration",
+    title: "Restoration of cladding and windows",
+    author: "Hullian111",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:34-35_Whitefriargate_Resto_Cladding_and_Windows,_Apr24.jpg",
+  },
+  {
+    id: "ext-envelope-retrofit",
+    title: "Layers of base coat and reinforcing mesh on a façade",
+    author: "Hamed shahrokhei",
+    license: "CC0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:The_steps_of_implementing_layers_of_paste_and_fireproof_mesh.jpg",
+  },
+  {
+    id: "sector-commercial-exterior",
+    title: "Cladding a new department store building",
+    author: "Fernweh",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Cladding_the_new_John_Lewis_-_geograph.org.uk_-_4713026.jpg",
+  },
+  {
+    id: "sector-multi-residential",
+    title: "Panelized exterior wall system on a residential building",
+    author: "Maxnik2003",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Durabond_IBS_Panel_System.jpg",
+  },
+  {
+    id: "sector-office-exterior",
+    title: "Discovery Square office buildings",
+    author: "w_lemay",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Discovery_Square,_2nd_Avenue_SW_and_4th_Street_SW,_Rochester,_MN.jpg",
+  },
   {
     id: "hero-interior-framing",
     title: "Metal ceiling framing installation in the future LIRR passenger concourse",
@@ -206,6 +359,22 @@ export const imageCredits: ImageCredit[] = [
 ];
 
 export const images = {
+  exterior: {
+    stucco: { src: extStucco, alt: "Exterior insulation boards partly covered with base coat and finish on a multi-storey façade", creditId: "ext-stucco-eifs" },
+    aluminum: { src: extAluminum, alt: "Crane lifting a large dark cladding panel into position on a new commercial building", creditId: "ext-aluminum-cladding" },
+    metal: { src: extMetal, alt: "Architectural metal panel cladding across the upper floors of a high-rise under construction", creditId: "ext-metal-panel-cladding" },
+    fiberCement: { src: extFiberCement, alt: "Curved fibre cement cladding bands on the balconies of a residential tower", creditId: "ext-fiber-cement" },
+    soffit: { src: extSoffit, alt: "Commercial building with metal panel cladding, fascia bands and a projecting canopy soffit", creditId: "ext-soffit-fascia" },
+    insulation: { src: extInsulation, alt: "Crew on suspended work platforms fixing exterior insulation boards to a multi-storey façade", creditId: "ext-exterior-insulation" },
+    framing: { src: extFraming, alt: "Office building façade under construction with scaffolding, framed openings and exterior wall assemblies", creditId: "ext-framing-sheathing" },
+    airBarrier: { src: extAirBarrier, alt: "Mid-rise building with exterior sheathing and membrane installed ahead of cladding", creditId: "ext-air-barrier" },
+    rainscreen: { src: extRainscreen, alt: "Curved metal rainscreen cladding being installed on a building façade with scaffolding", creditId: "ext-rainscreen" },
+    waterproofing: { src: extWaterproofing, alt: "Installer applying a trowelled coating over insulation board at the base of an exterior wall", creditId: "ext-waterproofing" },
+    sealants: { src: extSealants, alt: "Two workers on a suspended platform working at window openings on a masonry façade", creditId: "ext-sealants" },
+    restoration: { src: extRestoration, alt: "Scaffolded building façade during cladding and window restoration", creditId: "ext-facade-restoration" },
+    retrofit: { src: extRetrofit, alt: "Workers on scaffolding applying insulation boards and reinforcing mesh to an existing building", creditId: "ext-envelope-retrofit" },
+  },
+  heroFacade: { src: heroFacade, alt: "Boom lifts and a mobile crane alongside a large commercial building as metal cladding panels are installed", creditId: "hero-facade-cladding" },
   hero: {
     src: heroInteriorFraming,
     alt: "Trades on scissor and mast lifts installing suspended metal ceiling framing in a large commercial interior",
@@ -269,6 +438,9 @@ export const images = {
     },
   },
   sectors: {
+    commercialExterior: { src: secCommercialExt, alt: "Crane and boom lifts at a commercial building during exterior cladding installation", creditId: "sector-commercial-exterior" },
+    multiResidential: { src: secMultiRes, alt: "Multi-storey residential building with a panelized exterior wall system and balconies", creditId: "sector-multi-residential" },
+    officeExterior: { src: secOfficeExt, alt: "Multi-storey office buildings with metal panel and glazed façades", creditId: "sector-office-exterior" },
     commercial: {
       src: secCommercial,
       alt: "Large commercial interior with acoustic treatment being applied to the ceiling from lifts",

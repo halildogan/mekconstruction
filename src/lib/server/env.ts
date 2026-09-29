@@ -140,7 +140,8 @@ export function getServerEnv(): ServerEnv {
   } else {
     storage = {
       driver: "local",
-      dir: path.resolve(env.STORAGE_LOCAL_DIR ?? path.join(process.cwd(), ".data", "storage")),
+      // Runtime-configured data directory, not a build asset.
+      dir: path.resolve(/*turbopackIgnore: true*/ env.STORAGE_LOCAL_DIR ?? path.join(/*turbopackIgnore: true*/ process.cwd(), ".data", "storage")),
     };
   }
 

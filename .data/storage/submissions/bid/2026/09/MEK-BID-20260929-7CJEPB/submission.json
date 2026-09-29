@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "reference": "MEK-BID-20260929-7CJEPB",
+  "receivedAt": "2026-09-29T17:32:51.768Z",
+  "files": [
+    {
+      "name": "A-101 Floor Plan (IFT).pdf",
+      "key": "submissions/bid/2026/09/MEK-BID-20260929-7CJEPB/files/01-A-101-Floor-Plan-(IFT).pdf",
+      "size": 24,
+      "mime": "application/pdf",
+      "family": "pdf",
+      "sha256": "38bc4ca1a00654368a18aeb235286bc6ea42ac8e53587e960db1720589d687da"
+    }
+  ],
+  "notifications": {
+    "internal": "not-configured",
+    "acknowledgement": "not-configured"
+  },
+  "kind": "bid",
+  "data": {
+    "companyName": "Test GC Ltd",
+    "contactName": "Pat Tester",
+    "email": "pat@example.com",
+    "phone": "416-555-0100",
+    "projectName": "Test Fit-out <b>L5</b>",
+    "projectLocation": "Toronto",
+    "projectType": "office",
+    "bidDueDate": "2026-10-09",
+    "bidDueTime": "14:00",
+    "trades": [
+      "drywall",
+      "other"
+    ],
+    "tradesOther": "Doors",
+    "projectDescription": "Scope notes",
+    "documentsLink": "",
+    "message": ""
+  }
+}

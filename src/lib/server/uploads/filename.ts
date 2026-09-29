@@ -31,7 +31,6 @@ export function sanitizeFilename(input: string, maxLength = 120): string {
 /** A display-safe version of the original name: no control characters, bounded length. */
 export function displayFilename(input: string, maxLength = 180): string {
   const base = input.split(/[\\/]/).pop() ?? "";
-  // eslint-disable-next-line no-control-regex
   const cleaned = base.replace(/[\u0000-\u001f\u007f]/g, "").trim();
   return (cleaned || "document").slice(0, maxLength);
 }

@@ -21,7 +21,7 @@ export const metadata: Metadata = createMetadata({
   title: `${siteConfig.legalName} — Commercial Drywall, Framing & Interior Trades, Toronto & GTA`,
   absoluteTitle: true,
   description:
-    "Commercial construction subcontractor in Toronto and the GTA: drywall, metal stud framing, taping and finishing, insulation, painting and acoustic ceilings. Invite MEK to bid or request a quote.",
+    "Commercial subcontractor in Toronto and the GTA: drywall, metal stud framing, taping and finishing, insulation, painting and acoustic ceilings. Invite MEK to bid.",
   path: "/",
 });
 

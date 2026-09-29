@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mek-construction
+    container_name: mek-construction
+    restart: unless-stopped
+    ports:
+      - "9060:9060"
+    # Runtime secrets (Resend key + email addresses). Copy
+    # .env.local.example -> .env.local and fill in real values.
+    env_file:
+      - path: .env.local
+        required: false
+    environment:
+      NODE_ENV: production
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:9060/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

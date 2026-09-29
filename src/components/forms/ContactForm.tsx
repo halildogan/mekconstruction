@@ -73,10 +73,12 @@ export function ContactForm({ phone }: { phone: { display: string; e164: string 
   return (
     <form
       noValidate
-      onSubmit={handleSubmit(onValid, (formErrors) => {
-        setSummary(summarize(formErrors, FIELD_ORDER));
-        focusSummary();
-      })}
+      onSubmit={(event) =>
+        void handleSubmit(onValid, (formErrors) => {
+          setSummary(summarize(formErrors, FIELD_ORDER));
+          focusSummary();
+        })(event)
+      }
       onFocusCapture={markStarted}
       className="relative grid gap-6"
     >

@@ -12,7 +12,7 @@ import { QuoteForm } from "@/components/forms/QuoteForm";
 export const metadata: Metadata = createMetadata({
   title: "Request a Quote",
   description:
-    "Request a quotation from MEK Construction Inc. for commercial drywall, metal stud framing, taping and finishing, insulation, painting, acoustic ceilings or interior renovations in Toronto and the GTA.",
+    "Request a quotation for commercial drywall, framing, taping and finishing, insulation, painting, acoustic ceilings or interior renovations in Toronto and the GTA.",
   path: "/request-quote",
 });
 

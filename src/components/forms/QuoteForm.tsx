@@ -129,7 +129,9 @@ export function QuoteForm({ services, defaultService = "", phone }: QuoteFormPro
   return (
     <form
       noValidate
-      onSubmit={handleSubmit(onValid, (formErrors) => showSummary({ errors: summarize(formErrors, FIELD_ORDER) }))}
+      onSubmit={(event) =>
+        void handleSubmit(onValid, (formErrors) => showSummary({ errors: summarize(formErrors, FIELD_ORDER) }))(event)
+      }
       onFocusCapture={() => {
         markStarted();
         if (!started.current) {

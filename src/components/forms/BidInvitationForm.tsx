@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BID_TRADES, PROJECT_TYPES } from "@/lib/forms/options";
 import { bidInvitationSchema, type BidInvitation, type BidInvitationInput } from "@/lib/forms/schemas";
@@ -70,7 +70,7 @@ export function BidInvitationForm({ phone }: { phone: { display: string; e164: s
     register,
     handleSubmit,
     setError,
-    watch,
+    control,
     formState: { errors },
   } = useForm<BidInvitationInput, unknown, BidInvitation>({
     resolver: zodResolver(bidInvitationSchema),
@@ -87,7 +87,7 @@ export function BidInvitationForm({ phone }: { phone: { display: string; e164: s
   const [turnstileToken, setTurnstileToken] = useState<string>();
   const onUploadsChange = useCallback((next: UploaderState) => setUploads(next), []);
 
-  const trades = watch("trades");
+  const trades = useWatch({ control, name: "trades" });
   const showSummary = (next: { errors: SummaryError[]; message?: string }) => {
     setSummary(next);
     requestAnimationFrame(() => summaryRef.current?.focus());
@@ -138,7 +138,9 @@ export function BidInvitationForm({ phone }: { phone: { display: string; e164: s
   return (
     <form
       noValidate
-      onSubmit={handleSubmit(onValid, (formErrors) => showSummary({ errors: summarize(formErrors, FIELD_ORDER) }))}
+      onSubmit={(event) =>
+        void handleSubmit(onValid, (formErrors) => showSummary({ errors: summarize(formErrors, FIELD_ORDER) }))(event)
+      }
       onFocusCapture={() => {
         markStarted();
         if (!started.current) {

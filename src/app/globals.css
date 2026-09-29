@@ -191,8 +191,9 @@
 }
 
 @keyframes reveal {
+  /* Never fully transparent: content stays visible to print, crawlers and capture tools. */
   from {
-    opacity: 0;
+    opacity: 0.35;
     transform: translateY(18px);
   }
   to {

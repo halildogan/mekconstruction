@@ -11,7 +11,7 @@ import { BidInvitationForm } from "@/components/forms/BidInvitationForm";
 export const metadata: Metadata = createMetadata({
   title: "Invite MEK to Bid",
   description:
-    "General contractors and construction managers: send tender invitations, IFT drawings, specifications and addenda to MEK Construction Inc. for drywall, framing, finishing, ceilings and paint pricing in the GTA.",
+    "GCs and construction managers: send tender invitations, IFT drawings, specifications and addenda to MEK for interior trade pricing in the GTA.",
   path: "/invite-to-bid",
 });
 
