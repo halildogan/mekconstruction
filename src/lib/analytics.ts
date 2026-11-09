@@ -21,7 +21,7 @@ export type AnalyticsEvent =
 
 export type AnalyticsProps = Record<string, string | number | boolean>;
 
-export type AnalyticsProvider = "none" | "plausible" | "umami";
+export type AnalyticsProvider = "none" | "plausible" | "umami" | "google";
 
 export const analyticsConfig = {
   provider: (process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER ?? "none") as AnalyticsProvider,

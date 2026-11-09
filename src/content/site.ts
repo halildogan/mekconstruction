@@ -40,7 +40,7 @@ export interface ServiceRegion {
 
 export const siteConfig = {
   companyName: "MEK Construction",
-  legalName: "MEK Construction Inc.",
+  legalName: "MEK Construction",
   shortName: "MEK",
   url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   locale: "en-CA",
@@ -139,7 +139,7 @@ export const siteConfig = {
   legalNavigation: [
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
-    { label: "Image credits", href: "/image-credits" },
+    // { label: "Image credits", href: "/image-credits" },
   ] satisfies NavItem[],
 
   /** Date the static page copy was last reviewed; used for sitemap lastModified. */

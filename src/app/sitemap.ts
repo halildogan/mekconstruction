@@ -14,7 +14,6 @@ const STATIC_ROUTES = [
   "/invite-to-bid",
   "/privacy",
   "/terms",
-  "/image-credits",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

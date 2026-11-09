@@ -22,13 +22,30 @@ export function Analytics() {
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, []);
-
   const { provider, scriptUrl, siteId } = analyticsConfig;
   if (provider === "plausible" && scriptUrl && siteId) {
     return <Script src={scriptUrl} data-domain={siteId} strategy="afterInteractive" />;
   }
   if (provider === "umami" && scriptUrl && siteId) {
     return <Script src={scriptUrl} data-website-id={siteId} strategy="afterInteractive" />;
+  }
+  if (provider === "google" && scriptUrl && siteId) {
+    return (
+      <>
+        <Script
+          src={scriptUrl}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${siteId}');
+          `}
+        </Script>
+      </>
+  );
   }
   return null;
 }
