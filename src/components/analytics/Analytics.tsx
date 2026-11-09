@@ -29,11 +29,11 @@ export function Analytics() {
   if (provider === "umami" && scriptUrl && siteId) {
     return <Script src={scriptUrl} data-website-id={siteId} strategy="afterInteractive" />;
   }
-  if (provider === "google" && scriptUrl && siteId) {
+  if (provider === "google" && siteId) {
     return (
       <>
         <Script
-          src={scriptUrl}
+          src={`${scriptUrl}?id=${encodeURIComponent(siteId)}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -41,11 +41,11 @@ export function Analytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${siteId}');
+            gtag('config', ${JSON.stringify(siteId)});
           `}
         </Script>
       </>
-  );
+    );
   }
   return null;
 }
