@@ -9,22 +9,7 @@ const projectRoot = path.resolve(__dirname);
  * runs (see SELF_HOSTING.md).
  */
 
-const isDev = process.env.NODE_ENV === "development";
-
-function originOf(url: string | undefined): string | null {
-  if (!url) return null;
-  try {
-    return new URL(url).origin;
-  } catch {
-    return null;
-  }
-}
-
-const analyticsOrigin =
-  process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER && process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER !== "none"
-    ? originOf(process.env.NEXT_PUBLIC_ANALYTICS_SCRIPT_URL)
-    : null;
-const turnstile = "https://challenges.cloudflare.com";
+const isProd = process.env.NODE_ENV === 'production';
 
 /*
  * Content Security Policy without nonces so pages stay statically generated.
@@ -34,33 +19,28 @@ const turnstile = "https://challenges.cloudflare.com";
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} ${turnstile}${analyticsOrigin ? ` ${analyticsOrigin}` : ""}`,
+  `script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"} https://www.googletagmanager.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self'",
-  `connect-src 'self' ${turnstile}${analyticsOrigin ? ` ${analyticsOrigin}` : ""}`,
-  `frame-src https://www.google.com ${turnstile}`,
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "frame-src 'self'",
   "frame-ancestors 'none'",
-  "manifest-src 'self'",
-  "worker-src 'self' blob:",
-].join("; ");
+  "form-action 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  ...(isProd ? ['upgrade-insecure-requests'] : []),
+].join('; ');
 
 const securityHeaders = [
-  { key: "Content-Security-Policy", value: csp },
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "DENY" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  {
-    key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
-  },
-  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-  ...(isDev ? [] : [{ key: "Strict-Transport-Security", value: "max-age=31536000" }]),
+  { key: 'Content-Security-Policy', value: csp },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+  ...(isProd ? [{ key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' }] : []),
 ];
-
 const nextConfig: NextConfig = {
   // Self-contained server bundle (.next/standalone) for the Docker image.
   // `pnpm start` (next start) keeps working for the systemd deployment.
