@@ -26,7 +26,7 @@ export default function ImageCreditsPage() {
       />
       <Container className="py-14 sm:py-16 lg:py-20">
         <div className="relative overflow-x-auto border border-ink/15">
-          <table className="w-full min-w-[44rem] text-left text-[0.9375rem]">
+          <table className="w-full min-w-176 text-left text-[0.9375rem]">
             <caption className="sr-only">Photograph credits and licences</caption>
             <thead className="bg-paper">
               <tr>
