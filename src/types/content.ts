@@ -24,7 +24,15 @@ export interface Seo {
   description?: string;
 }
 
-export type ServiceCategoryId = "facade-cladding" | "building-envelope" | "facade-repair" | "interior";
+export type ServiceCategoryId =
+  | "facade-cladding"
+  | "building-envelope"
+  | "facade-repair"
+  | "interior"
+  | "residential-renovations"
+  | "construction-management";
+
+export type ProjectType = "commercial" | "residential";
 
 export interface ServiceCategory {
   id: ServiceCategoryId;
@@ -52,6 +60,7 @@ export interface CoordinatedScope {
 export interface Service {
   slug: string;
   category: ServiceCategoryId;
+  projectTypes?: ProjectType[];
   name: string;
   /** One or two sentences used on cards and in meta descriptions. */
   summary: string;

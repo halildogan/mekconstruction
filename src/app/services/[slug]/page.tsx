@@ -35,13 +35,14 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
     title: service.seo?.title ?? service.name,
     description: service.seo?.description ?? service.summary,
     path: `/services/${service.slug}`,
+    image: `/services/${service.slug}/opengraph-image`
   });
 }
 
 function SpecList({ title, items, id }: { title: string; items: string[]; id: string }) {
   return (
     <section aria-labelledby={id} className="border-t border-ink/15 pt-6">
-      <h2 id={id} className="eyebrow text-steel-600">
+      <h2 id={id} className="heading eyebrow text-steel-600">
         {title}
       </h2>
       <ul className="mt-4 grid gap-x-8 sm:grid-cols-2">
@@ -68,11 +69,13 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
     getServices(),
   ]);
   const serviceSectors = sectors.filter((s) => service.sectors.includes(s.slug));
-
+  const serviceIndex = allServices.findIndex(
+    (item) => item.slug === service.slug,
+  );
   return (
     <>
       <PageHero
-        eyebrow={`Service ${String(allServices.indexOf(service) + 1).padStart(2, "0")} — Toronto & GTA`}
+        eyebrow={`Service ${String(serviceIndex + 1).padStart(2, "0")} — Ontario, Canada`}
         title={service.name}
         lead={<p>{service.tagline}</p>}
         breadcrumbs={[
@@ -133,9 +136,33 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               </section>
             )}
           </div>
+          
         </Container>
       </Section>
+      
+      <Section
+        aria-labelledby="service-areas-heading"
+        className="border-t border-ink/15"
+      >
+        <Container className="mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <h2
+            id="service-areas-heading"
+            className="heading text-xl md:text-2xl"
+          >
+            Service Areas Across Ontario
+          </h2>
 
+          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-steel-700">
+            MEK Construction provides commercial construction
+            and specialty trade services throughout Ontario,
+            including Toronto, the Greater Toronto Area,
+            Hamilton, Niagara, Kitchener-Waterloo, London,
+            Windsor, Kingston, Ottawa, Barrie, North Bay,
+            Sudbury, and surrounding communities.
+          </p>
+        </Container>
+      </Section>
+            
       {projects.length > 0 && (
         <Section tone="white" aria-labelledby="service-projects-heading">
           <Container>

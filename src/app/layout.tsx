@@ -34,20 +34,53 @@ const plexMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+
   title: {
-    default: `${siteConfig.legalName} — Commercial Interior Trade Contractor, Toronto & GTA`,
+    default: `${siteConfig.legalName} — Commercial Construction & Specialty Trade Contractor | Toronto & GTA`,
     template: `%s | ${siteConfig.legalName}`,
   },
+
   description: siteConfig.description,
   applicationName: siteConfig.legalName,
-  formatDetection: { telephone: false, email: false, address: false },
+
+  alternates: {
+    languages: {
+      "en-CA": siteConfig.url,
+    },
+  },
+
   openGraph: {
     type: "website",
     siteName: siteConfig.legalName,
     locale: "en_CA",
+    url: siteConfig.url,
+    title: `${siteConfig.legalName} — Commercial Construction & Specialty Trade Contractor | Toronto & GTA`,
+    description: siteConfig.description,
   },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.legalName,
+    description: siteConfig.description,
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
 };
 
 export const viewport: Viewport = {

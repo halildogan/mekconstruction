@@ -45,6 +45,24 @@ export const serviceCategories: ServiceCategory[] = [
     emphasis: "secondary",
     order: 4,
   },
+  {
+    id: "residential-renovations",
+    name: "Residential Renovations & Improvements",
+    shortName: "Residential Renovations",
+    description:
+      "Kitchen and bathroom renovations, basement finishing, whole-home renovations, additions, decks and exterior improvements.",
+    emphasis: "secondary",
+    order: 5,
+  },
+  {
+    id: "construction-management",
+    name: "Design-Build & Construction Management",
+    shortName: "Project Management",
+    description:
+      "Integrated design-build delivery, construction planning, trade coordination, procurement and project management for commercial and residential projects.",
+    emphasis: "secondary",
+    order: 6,
+  },
 ];
 
 /**

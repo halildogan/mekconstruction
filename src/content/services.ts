@@ -1,7 +1,7 @@
 import type { Service } from "@/types/content";
 import { images } from "@/content/images";
 import { exteriorServices } from "@/content/services-exterior";
-
+import { additionalServices } from "@/content/services-additional";
 /**
  * Service catalogue — the single source of truth for service pages, the
  * services index, homepage cards, forms and structured data.
@@ -444,4 +444,4 @@ const interiorServices: Service[] = [
   },
 ];
 
-export const services: Service[] = [...exteriorServices, ...interiorServices];
+export const services: Service[] = [...exteriorServices, ...interiorServices, ...additionalServices];
