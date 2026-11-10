@@ -27,17 +27,6 @@ COPY --from=deps /app/node_modules ./node_modules
 # .dockerignore keeps host node_modules, .next and .env out of this copy.
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-# NEXT_PUBLIC_* values are inlined at build time; pass them as build args if used.
-ARG NEXT_PUBLIC_SITE_URL=https://mekdomain.ca
-ARG NEXT_PUBLIC_ANALYTICS_PROVIDER=none
-ARG NEXT_PUBLIC_ANALYTICS_SCRIPT_URL=
-ARG NEXT_PUBLIC_ANALYTICS_SITE_ID=
-ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
-    NEXT_PUBLIC_ANALYTICS_PROVIDER=$NEXT_PUBLIC_ANALYTICS_PROVIDER \
-    NEXT_PUBLIC_ANALYTICS_SCRIPT_URL=$NEXT_PUBLIC_ANALYTICS_SCRIPT_URL \
-    NEXT_PUBLIC_ANALYTICS_SITE_ID=$NEXT_PUBLIC_ANALYTICS_SITE_ID \
-    NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 RUN pnpm build
 
 # ── Runtime ───────────────────────────────────────────────────
