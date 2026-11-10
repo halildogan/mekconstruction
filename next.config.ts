@@ -19,11 +19,11 @@ const isProd = process.env.NODE_ENV === 'production';
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"} https://www.googletagmanager.com`,
+  `script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"} https://www.googletagmanager.com https://static.cloudflareinsights.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com https://stats.g.doubleclick.net https://cloudflareinsights.com",
   "font-src 'self'",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com",
   "frame-src 'self'",
   "frame-ancestors 'none'",
   "form-action 'self'",
