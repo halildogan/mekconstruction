@@ -144,7 +144,7 @@ export default async function HomePage() {
       )}
 
       <BidCta index="04" />
-      <ServiceArea index="05" />
+      {/* <ServiceArea index="05" /> */}
       <CTASection />
     </>
   );

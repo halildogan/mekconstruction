@@ -34,14 +34,13 @@ export function HomeHero() {
         <div className="max-w-4xl">
           <p className="eyebrow text-accent">{siteConfig.legalName} — Toronto &amp; GTA</p>
           <h1 id="hero-heading" className="display mt-5 text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
-            Commercial interior trades.
-            <span className="block text-concrete-300">Built to specification.</span>
+            Commercial & Residential.
+            <span className="block text-concrete-300">Built to Last.</span>
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-concrete-200 sm:text-xl">
-            {siteConfig.legalName} is a commercial construction subcontractor serving Toronto and the Greater Toronto
-            Area. We price and install drywall, metal stud framing, taping and finishing, insulation, painting, acoustic
-            ceilings and related interior scopes for general contractors, construction managers, developers and property
-            owners.
+            {siteConfig.legalName} delivers commercial and residential construction services across Ontario,
+            specializing in façade and cladding systems, building envelopes, interior construction, renovations,
+            and building restoration.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <LinkButton href="/invite-to-bid" size="lg" arrow>

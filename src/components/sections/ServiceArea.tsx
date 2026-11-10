@@ -33,7 +33,7 @@ export function ServiceArea({ index = "05" }: { index?: string }) {
                 {region.slug === "toronto" && <MapPin aria-hidden="true" className="size-4 text-accent-ink" />}
                 {region.name}
               </h3>
-              <ul className="mt-3 grid gap-1.5 text-[0.9375rem] text-steel-600">
+              <ul className="mt-3 grid gap-1.5 text-[0.9375rem] text-steel-600 max-h-56 overflow-auto">
                 {region.municipalities.map((m) => (
                   <li key={m}>{m}</li>
                 ))}

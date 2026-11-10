@@ -87,6 +87,31 @@
     color: var(--color-ink);
   }
 
+  /* Global scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #9aa2a9 transparent;
+  }
+
+  /* Chrome, Safari, Edge */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #9aa2a9;
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b737b;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

@@ -28,12 +28,11 @@ export default async function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="A commercial interior trade contractor."
+        title="Built on Expertise. Driven by Quality."
         lead={
           <p>
-            {siteConfig.legalName} is an Ontario construction company based in {address.locality}, {address.city}. We work
-            primarily as a subcontractor on commercial projects across the Greater Toronto Area, pricing and installing
-            interior trade scopes for general contractors, construction managers, developers and building owners.
+            {siteConfig.legalName} is an Ontario-based construction company headquartered in {address.locality}, {address.city}, providing commercial and residential construction services throughout Ontario.
+            We specialize in façade and cladding systems, building envelopes, interior construction, renovations, restoration, and design-build project delivery.
           </p>
         }
         breadcrumbs={[{ name: "About", path: "/about" }]}
@@ -46,25 +45,22 @@ export default async function AboutPage() {
             index="01"
             eyebrow="Commercial focus"
             id="focus-heading"
-            title="Built around the interior trade package."
+            title="Comprehensive Construction. From Building Envelope to Interior Finishes."
           />
           <div className="mt-10 grid gap-10 lg:grid-cols-12">
             <div className="prose-mek lg:col-span-7 lg:col-start-4">
               <p>
-                MEK is organized around the work that happens between the structure and the finished space: layout and
-                metal stud framing, gypsum board, insulation, taping and finishing, ceilings and paint — plus the selective
-                demolition and renovation work that often comes first.
-              </p>
-              <p>
-                We work within the contract structure of commercial construction. On most projects that means pricing a
-                trade package from tender documents, then working under the general contractor or construction manager
-                to their schedule, site rules and quality requirements.
-              </p>
-              <p>
-                Everything MEK installs is built to the approved drawings and specifications. We do not provide
-                architectural or engineering design; where an assembly is rated, engineered or specified, we install it to
-                the documents issued for the project and raise questions through the proper channels.
-              </p>
+              MEK Construction delivers integrated commercial and residential construction services across Ontario, with core expertise in façade and cladding systems, exterior wall assemblies, building envelope construction, interior trades, and building restoration.
+            </p>
+            <p>
+              Our exterior construction capabilities include stucco and EIFS, aluminum and architectural metal cladding, exterior insulation, air and weather barriers, waterproofing, façade repairs, and building envelope retrofits. Interior services extend from metal stud framing, drywall installation, insulation, taping and finishing to acoustic ceilings, painting, flooring, and complete interior renovations.
+            </p>
+            <p>
+              We support projects through specialized subcontracting, renovation contracts, design-build delivery, and construction management. Whether working with general contractors, developers, commercial property owners, or homeowners, we coordinate project requirements, construction schedules, materials, and trade activities to maintain quality and efficient execution.
+            </p>
+            <p>
+              Our work follows applicable building codes, approved construction documents, and project specifications. Where architectural design, engineering, permits, or specialized certifications are required, these services can be coordinated with appropriately licensed professionals as part of the agreed project scope.
+            </p>
             </div>
           </div>
         </Container>
@@ -84,7 +80,7 @@ export default async function AboutPage() {
             }
           />
           <ul className="mt-10 grid border-t border-ink/15 sm:grid-cols-2 lg:grid-cols-5">
-            {services.map((s, i) => (
+            {services.slice(0, 15).map((s, i) => (
               <li key={s.slug} className="border-b border-ink/15 sm:odd:border-r lg:border-r lg:[&:nth-child(5n)]:border-r-0">
                 <Link href={`/services/${s.slug}`} className="group flex h-full flex-col gap-2 p-5 hover:bg-paper">
                   <span className="eyebrow text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
@@ -106,7 +102,7 @@ export default async function AboutPage() {
             description={<p>Estimating, coordination, execution and quality — the stages every trade package goes through.</p>}
           />
           <div className="mt-12">
-            <CapabilityList items={processSteps} columns={3} />
+            <CapabilityList items={processSteps} columns={3} limit={0} />
           </div>
         </Container>
       </Section>

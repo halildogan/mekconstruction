@@ -6,11 +6,14 @@ export function CapabilityList({
   items,
   dark = false,
   columns = 2,
+  limit = 15,
 }: {
   items: CapabilityItem[];
   dark?: boolean;
   columns?: 1 | 2 | 3;
+  limit?: 5 | 10 | 15 | 0;
 }) {
+  const filtered = limit === 0 ? items : items.slice(0, limit);
   return (
     <ol
       className={cn(
@@ -20,7 +23,7 @@ export function CapabilityList({
         columns === 3 && "md:grid-cols-2 md:gap-x-10 xl:grid-cols-3",
       )}
     >
-      {items.map((item, i) => (
+      {filtered.map((item, i) => (
         <li key={item.title} className={cn("grid grid-cols-[3rem_1fr] border-b py-6", dark ? "border-white/15" : "border-ink/15")}>
           <span className={cn("eyebrow pt-1.5", dark ? "text-accent" : "text-accent-ink")}>
             {String(i + 1).padStart(2, "0")}

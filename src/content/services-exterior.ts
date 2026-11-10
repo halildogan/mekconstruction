@@ -463,7 +463,7 @@ export const exteriorServices: Service[] = [
     scopeNote:
       "Repairs are carried out to the owner's condition assessment, repair drawings or specifications. MEK does not provide building-envelope condition assessments or engineering.",
     image: images.exterior.restoration,
-    featured: true,
+    featured: false,
     order: 12,
     seo: {
       title: "Façade Repair & Restoration Contractor — Toronto",
