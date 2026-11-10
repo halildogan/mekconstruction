@@ -1,3 +1,4 @@
+import { siteConfig } from "@/content/site";
 import { getServiceBySlug, getServices } from "@/lib/content";
 import { OG_CONTENT_TYPE, OG_SIZE, renderOgImage } from "@/lib/og";
 import { notFound } from "next/navigation";
@@ -41,5 +42,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     description: service?.tagline,
     market,
     location: "Ontario, Canada",
+    email: siteConfig.email.default,
+    phone: siteConfig.phone.display,
+    domain: siteConfig.domain.display
   });
 }

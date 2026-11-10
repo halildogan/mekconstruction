@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
+import { siteConfig } from "@/content/site";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
@@ -28,14 +29,19 @@ interface OgImageOptions {
   description?: string;
   market?: string;
   location?: string;
+  domain?: string;
+  email?: string;
+  phone?: string;
 }
-
 export async function renderOgImage({
   eyebrow,
   title,
   description,
-  market = "Commercial & Residential Construction",
-  location = "Ontario, Canada",
+  market = siteConfig.market,
+  location = `${siteConfig.address.regionName ?? 'Ontario'}, ${siteConfig.address.countryName ?? 'Canada'}`,
+  domain = siteConfig.domain.display,
+  email,
+  phone,
 }: OgImageOptions) {
   const titleFontSize =
     title.length > 48 ? 56 :
@@ -154,32 +160,26 @@ export async function renderOgImage({
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: "column",
+            gap: 12,
             width: "100%",
             borderTop: "1px solid #3b4147",
-            paddingTop: 22,
+            paddingTop: 18,
           }}
         >
-          <span
-            style={{
-              fontSize: 20,
-              fontWeight: 500,
-              color: "#b9bfc4",
-            }}
-          >
-            {market} · {location}
-          </span>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span style={{ fontSize: 19, color: "#b9bfc4" }}>
+              {market} · {location}
+            </span>
+            <span style={{ fontSize: 19, color: "#e3a21a" }}>
+              {domain}
+            </span>
+          </div>
 
-          <span
-            style={{
-              fontFamily: "Plex Mono",
-              fontSize: 19,
-              color: "#e3a21a",
-            }}
-          >
-            mekdomain.ca
-          </span>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 17, color: "#b9bfc4" }}>
+            {phone && <span>{phone}</span>}
+            {email &&  <span style={{ fontSize: 19, color: "#e3a21a" }}>{email}</span>}
+          </div>
         </div>
       </div>
     ),

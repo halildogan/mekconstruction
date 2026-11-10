@@ -56,13 +56,23 @@ export const siteConfig = {
   description:
     "MEK Construction Inc. is a commercial construction trade contractor serving Toronto and the GTA: drywall, metal stud framing, taping and finishing, insulation, painting, acoustic ceilings and interior renovation scopes for general contractors, construction managers and building owners.",
   tagline: "Commercial interior trade contractor — Toronto & GTA",
-
+  market: 'Commercial & Residential Construction',
   phone: {
     display: "(647) 979-1421",
     e164: "+16479791421",
   },
+  domain: {
+    display: "mekdomain.ca",
+    full: "https://mekdomain.ca",
+    prefix: "ca",
+  },
+  email: {
+    default: 'info@mekdomain.ca',
+    support: 'support@mekdomain.ca',
+    estimate: 'estimate@mekdomain.ca'
+  },
   publicEmail: undefined as string | undefined,
-
+  location: 'Ontario, Canada',
   address: {
     street: "34 Paragon Rd",
     locality: "Etobicoke",
