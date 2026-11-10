@@ -87,29 +87,29 @@
     color: var(--color-ink);
   }
 
-  /* Global scrollbar */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #9aa2a9 transparent;
-  }
-
-  /* Chrome, Safari, Edge */
+  /* Width of the entire scrollbar */
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    /* Horizontal scrollbars (tab strips, wide tables) get the same thin
+      track; without this they fall back to the thick native height. */
+    height: 3px;
   }
 
+  /* Background/track of the scrollbar */
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--bg-1);
+    border-radius: 3px;
   }
 
+  /* Draggable scrollbar handle */
   ::-webkit-scrollbar-thumb {
-    background: #9aa2a9;
-    border-radius: 0;
+    background: var(--line);
+    border-radius: 3px;
   }
 
+  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #6b737b;
+    background: var(--line);
   }
 
   @media (prefers-reduced-motion: reduce) {
