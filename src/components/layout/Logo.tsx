@@ -27,7 +27,7 @@ export function Logo({ dark = false, className }: { dark?: boolean; className?: 
     <span className={cn("inline-flex items-center gap-3", className)}>
       <LogoMark className={cn("size-10", dark && "outline outline-1 -outline-offset-1 outline-white/20")} />
       <span className="flex flex-col leading-none">
-        <span className={cn("text-[1.375rem] font-[800] tracking-[0.04em] [font-stretch:88%]", dark ? "text-white" : "text-ink")}>
+        <span className={cn("text-[1.375rem] font-extrabold tracking-[0.04em] font-stretch-88%", dark ? "text-white" : "text-ink")}>
           MEK
         </span>
         <span className={cn("eyebrow mt-1 text-[0.625rem] tracking-[0.14em]", dark ? "text-steel-400" : "text-steel-600")}>
